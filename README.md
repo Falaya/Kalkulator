@@ -23,3 +23,5 @@
     - zapis wyniku w formnie 1/x, gdzie x to nasz wynik
     - usuwanie pojedynczego znaku
     - wstawianie kropki
+# Aktualny postęp
+    - brak postępu
