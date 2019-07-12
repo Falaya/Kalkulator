@@ -1,5 +1,7 @@
 # Kalkulator
 # Projekt kalkulatora z użyciem GUI
+# Wersja 0.0
+    - rozrysowanie umieszczenia wszystkich elementów
 # Wersja 1.0
     - wyświetlacz dostosowany do co najmniej 10 liczb
     - przycisk do dodawania
