@@ -40,11 +40,11 @@ class Application(Frame):
         self.przycisk_nawiasy.grid(row = 6, column = 0, sticky = W)
 
         #Przycisk C - czyszczenie wszystkiego
-        self.przycisk_C = Button(self, text = "C", command = "Kasuj wszystko")
+        self.przycisk_C = Button(self, text = "C", command = self.usuwanie_C)
         self.przycisk_C.grid(row = 6, column = 1, sticky = W)
 
         #Przycisk <- - usuwanie ostatniego znaku
-        self.przycisk_back = Button(self, text = "<--", command = "Kasuj znak")
+        self.przycisk_back = Button(self, text = "<--", command = self.usuwanie_back)
         self.przycisk_back.grid(row = 6, column = 2, sticky = W)
         
         #Przycisk / - dzielenie
@@ -124,13 +124,26 @@ class Application(Frame):
         self.przycisk_0.grid(row = 14, column = 1, sticky = W)  
 
         #Przycisk . - stawianie kropki
-        self.przycisk_kropka = Button(self, text = ".", command = "Wprowadź kropkę")
+        self.przycisk_kropka = Button(self, text = ".", command = self.wprowadz_kropka)
         self.przycisk_kropka.grid(row = 14, column = 2, sticky = W) 
 
         #Przycisk = - wykonanie operacji
         self.przycisk_rownasie = Button(self, text = "=", command = self.wynik)
-        self.przycisk_rownasie.grid(row = 14, column = 3, sticky = W)       
-
+        self.przycisk_rownasie.grid(row = 14, column = 3, sticky = W)   
+        
+    def usuwanie_C(self):
+        """Usuwa wszystkie znaki z pamięci kalkulatora"""
+        self.znak = ""
+        self.liczby = []
+        self.wyswietlacz.delete(0.0,END)
+        
+    def usuwanie_back(self):
+        """Usuwa wszystkie znaki z pamięci kalkulatora"""
+        dlugosc = len(self.znak) - 1
+        self.znak = self.znak[:dlugosc]
+        self.wyswietlacz.delete(0.0,END)
+        self.wyswietlacz.insert(0.0,self.znak)        
+        
     def dzielenie(self):
         """Wprowadź znak dzielenia"""
         self.liczby.append(self.znak)
@@ -209,28 +222,46 @@ class Application(Frame):
         self.znak += "0"
         self.wyswietlacz.insert(END,0)
 
+    def wprowadz_kropka(self):
+        """Wprowadź ."""
+        self.znak += "."
+        self.wyswietlacz.insert(END,".")        
+        
     def wynik(self):
         self.liczby.append(self.znak)
         self.wyswietlacz.delete(0.0,END)
         wynik = 0
-        print("Liczby:", self.liczby)
         for i in self.liczby:
             if i == "/":
-                wynik /= int(self.liczby[self.liczby.index(i)+1])
-                wynik = int(wynik)
-                self.wyswietlacz.insert(END, wynik)
-
+                wynik /= float(self.liczby[self.liczby.index(i)+1])
+                if wynik%1 == 0:
+                    wynik = int(wynik)
+                    self.wyswietlacz.insert(END, wynik)
+                else:
+                    self.wyswietlacz.insert(END, wynik)
             elif i == "*":
-                wynik *= int(self.liczby[self.liczby.index(i)+1])
-                self.wyswietlacz.insert(END, wynik)
+                wynik *= float(self.liczby[self.liczby.index(i)+1])
+                if wynik%1 == 0:
+                    wynik = int(wynik)
+                    self.wyswietlacz.insert(END, wynik)
+                else:
+                    self.wyswietlacz.insert(END, wynik)
 
             elif i == "-":
-                wynik -= int(self.liczby[self.liczby.index(i)+1])
-                self.wyswietlacz.insert(END, wynik)
+                wynik -= float(self.liczby[self.liczby.index(i)+1])
+                if wynik%1 == 0:
+                    wynik = int(wynik)
+                    self.wyswietlacz.insert(END, wynik)
+                else:
+                    self.wyswietlacz.insert(END, wynik)
 
             elif i == "+":
-                wynik += int(self.liczby[self.liczby.index(i)+1])
-                self.wyswietlacz.insert(END, wynik)
+                wynik += float(self.liczby[self.liczby.index(i)+1])
+                if wynik%1 == 0:
+                    wynik = int(wynik)
+                    self.wyswietlacz.insert(END, wynik)
+                else:
+                    self.wyswietlacz.insert(END, wynik)
  
             else:
                 if self.liczby.index(i)== 0:
@@ -238,7 +269,7 @@ class Application(Frame):
 
         self.liczby = [wynik] 
 
-        root = Tk()
+root = Tk()
 root.title("Kalkulator")
 root.geometry("440x600")
 
