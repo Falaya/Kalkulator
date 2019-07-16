@@ -1,5 +1,6 @@
-#kalkulator -0.1
+#kalkulator 1.7
 #Wyświetlacz na 10 liczb, dodawanie, odejmowanie, mnożenie i dzielenie.
+#Po wprowadzeniu znaku innego niż liczba kalkulator przechowuje liczbę w pamięci i zeruje wyświetlacz
 
 from tkinter import *
 
@@ -9,6 +10,8 @@ class Application(Frame):
         super(Application, self).__init__(master)
         self.grid()
         self.create_widgets()
+        self.znak = ""
+        self.liczby = []
 
     def create_widgets(self):
         """Tworzenie przycisków i wyświetlacza."""
@@ -125,70 +128,117 @@ class Application(Frame):
         self.przycisk_kropka.grid(row = 14, column = 2, sticky = W) 
 
         #Przycisk = - wykonanie operacji
-        self.przycisk_kropka = Button(self, text = "=", command = "Oblicz wszystko")
-        self.przycisk_kropka.grid(row = 14, column = 3, sticky = W)       
+        self.przycisk_rownasie = Button(self, text = "=", command = self.wynik)
+        self.przycisk_rownasie.grid(row = 14, column = 3, sticky = W)       
 
     def dzielenie(self):
         """Wprowadź znak dzielenia"""
-        znak = "/"
-        self.wyswietlacz.insert(END,znak)
+        self.liczby.append(self.znak)
+        self.liczby.append("/")
+        self.znak = ""
+        self.wyswietlacz.delete(0.0,END)
 
     def wprowadz_1(self):
         """Wprowadź 1"""
+        self.znak += "1"
         self.wyswietlacz.insert(END,1)
     
     def wprowadz_2(self):
         """Wprowadź 2"""
+        self.znak += "2"
         self.wyswietlacz.insert(END,2)
         
     def wprowadz_3(self):
         """Wprowadź 3"""
+        self.znak += "3"
         self.wyswietlacz.insert(END,3)
         
     def mnozenie(self):
         """Wprowadź znak mnożenia,"""
-        znak = "*"
-        self.wyswietlacz.insert(END,znak)
+        self.liczby.append(self.znak)
+        self.liczby.append("*")
+        self.znak = ""
+        self.wyswietlacz.delete(0.0,END)
         
     def wprowadz_4(self):
         """Wprowadź 4"""
+        self.znak += "4"
         self.wyswietlacz.insert(END,4)
         
     def wprowadz_5(self):
         """Wprowadź 5"""
+        self.znak += "5"
         self.wyswietlacz.insert(END,5)   
         
     def wprowadz_6(self):
         """Wprowadź 6"""
+        self.znak += "6"
         self.wyswietlacz.insert(END,6)  
         
     def odejmowanie(self):
         """Wprowadź znak odejmowania"""
-        znak = "-"
-        self.wyswietlacz.insert(END,znak) 
+        self.liczby.append(self.znak)
+        self.liczby.append("-")
+        self.znak = ""
+        self.wyswietlacz.delete(0.0,END)
         
     def wprowadz_7(self):
         """Wprowadź 7"""
+        self.znak += "7"
         self.wyswietlacz.insert(END,7) 
         
     def wprowadz_8(self):
         """Wprowadź 8"""
+        self.znak += "8"
         self.wyswietlacz.insert(END,8)  
         
     def wprowadz_9(self):
         """Wprowadź 9"""
+        self.znak += "9"
         self.wyswietlacz.insert(END,9)   
         
     def dodawanie(self):
         """Wprowadź znak dodawania"""
-        znak = "+"
-        self.wyswietlacz.insert(END,znak)
+        self.liczby.append(self.znak)
+        self.liczby.append("+")
+        self.znak = ""
+        self.wyswietlacz.delete(0.0,END)
         
     def wprowadz_0(self):
         """Wprowadź 0"""
+        self.znak += "0"
         self.wyswietlacz.insert(END,0)
-        
-root = Tk()
+
+    def wynik(self):
+        self.liczby.append(self.znak)
+        self.wyswietlacz.delete(0.0,END)
+        wynik = 0
+        print("Liczby:", self.liczby)
+        for i in self.liczby:
+            if i == "/":
+                wynik /= int(self.liczby[self.liczby.index(i)+1])
+                wynik = int(wynik)
+                self.wyswietlacz.insert(END, wynik)
+
+            elif i == "*":
+                wynik *= int(self.liczby[self.liczby.index(i)+1])
+                self.wyswietlacz.insert(END, wynik)
+
+            elif i == "-":
+                wynik -= int(self.liczby[self.liczby.index(i)+1])
+                self.wyswietlacz.insert(END, wynik)
+
+            elif i == "+":
+                wynik += int(self.liczby[self.liczby.index(i)+1])
+                self.wyswietlacz.insert(END, wynik)
+ 
+            else:
+                if self.liczby.index(i)== 0:
+                    wynik += int(i)
+
+        self.liczby = [wynik] 
+
+        root = Tk()
 root.title("Kalkulator")
 root.geometry("440x600")
 
