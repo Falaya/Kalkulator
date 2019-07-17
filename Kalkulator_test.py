@@ -265,7 +265,7 @@ class Application(Frame):
  
             else:
                 if self.liczby.index(i)== 0:
-                    wynik += int(i)
+                    wynik += float(i)
 
         self.liczby = [wynik] 
 
