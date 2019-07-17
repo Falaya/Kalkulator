@@ -21,35 +21,35 @@ class Application(Frame):
 
         #Model kalulatora
         self.nazwa = Label(self, text = "STANIO 7260",font=("Courier", 18) )
-        self.nazwa.grid(row = 1, column = 0, sticky = W)
+        self.nazwa.grid(row = 1, column = 0, sticky = W, columnspan = 4)
         
         #Oddzielenie nazwy kalkulatora od górnej krawędzi wyświetlacza
         self.przerwa2 = Label(self,font=("Courier", 4) )
         self.przerwa2.grid(row = 2, column = 0, sticky = W)
 
         #Wyświetlacz
-        self.wyswietlacz = Text(self, width = 11, height = 1, wrap = W, font=("Courier", 50))
-        self.wyswietlacz.grid(row = 3, column = 0, columnspan = 20, rowspan = 2, sticky = W)
+        self.wyswietlacz = Text(self, width = 10, height = 1, wrap = W, font=("Courier", 50))
+        self.wyswietlacz.grid(row = 3, column = 1, columnspan = 4, rowspan = 2, sticky = W)
 
         #Oddzielenie górnej krawędzi wyświetlacza od przycisków
         self.przerwa2 = Label(self,font=("Courier", 4) )
         self.przerwa2.grid(row = 5, column = 0, sticky = W)
         
         #Przycisk () - wstawienie obu nawiasów
-        self.przycisk_nawiasy = Button(self, text = "( )", command = "Wstaw nawiasy")
-        self.przycisk_nawiasy.grid(row = 6, column = 0, sticky = W)
+        self.przycisk_nawiasy = Button(self, text = "( )", command = "Wstaw nawiasy", font=("Courier", 28))
+        self.przycisk_nawiasy.grid(row = 6, column = 1, sticky = N)
 
         #Przycisk C - czyszczenie wszystkiego
-        self.przycisk_C = Button(self, text = "C", command = self.usuwanie_C)
-        self.przycisk_C.grid(row = 6, column = 1, sticky = W)
+        self.przycisk_C = Button(self, text = " C ", command = self.usuwanie_C, font=("Courier", 28))
+        self.przycisk_C.grid(row = 6, column = 2, sticky = N)
 
         #Przycisk <- - usuwanie ostatniego znaku
-        self.przycisk_back = Button(self, text = "<--", command = self.usuwanie_back)
-        self.przycisk_back.grid(row = 6, column = 2, sticky = W)
+        self.przycisk_back = Button(self, text = "<--", command = self.usuwanie_back, font=("Courier", 28))
+        self.przycisk_back.grid(row = 6, column = 3, sticky = N)
         
         #Przycisk / - dzielenie
-        self.przycisk_dzielenie = Button(self, text = "/", command = self.dzielenie)
-        self.przycisk_dzielenie.grid(row = 6, column = 3, sticky = W)
+        self.przycisk_dzielenie = Button(self, text = " / ", command = self.dzielenie, font=("Courier", 28))
+        self.przycisk_dzielenie.grid(row = 6, column = 4, sticky = N)
         
         #Oddzielenie przyciskow
         self.przerwa3 = Label(self,font=("Courier", 4) )
