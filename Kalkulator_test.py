@@ -36,7 +36,7 @@ class Application(Frame):
         self.przerwa2.grid(row = 5, column = 0, sticky = W)
         
         #Przycisk () - wstawienie obu nawiasów
-        self.przycisk_nawiasy = Button(self, text = "( )", command = "Wstaw nawiasy", font=("Courier", 28))
+        self.przycisk_nawiasy = Button(self, text = "1/x", command = self.odwrocenie_liczby, font=("Courier", 28))
         self.przycisk_nawiasy.grid(row = 6, column = 1, sticky = W)
 
         #Przycisk C - czyszczenie wszystkiego
@@ -116,7 +116,7 @@ class Application(Frame):
         self.przerwa6.grid(row = 13, column = 0, sticky = W)
         
         #Przycisk +/- - zmiana znaku liczby w wyświetlaczu
-        self.przycisk_dodawanie = Button(self, text = "+/-", command = "Wprowadź +/-", font=("Courier", 28))
+        self.przycisk_dodawanie = Button(self, text = "+/-", command = self.zmiana_znaku, font=("Courier", 28))
         self.przycisk_dodawanie.grid(row = 14, column = 1, sticky = W)
 
         #Przycisk 0 - wprowadzenie liczby 0
@@ -130,6 +130,12 @@ class Application(Frame):
         #Przycisk = - wykonanie operacji
         self.przycisk_rownasie = Button(self, text = " = ", command = self.wynik, font=("Courier", 28))
         self.przycisk_rownasie.grid(row = 14, column = 4, sticky = W)   
+
+    def odwrocenie_liczby(self):
+        """Odwrócenie liczby"""
+        self.znak = "ERROR"
+        self.wyswietlacz.delete(0.0,END)
+        self.wyswietlacz.insert(0.0,self.znak)
         
     def usuwanie_C(self):
         """Usuwa wszystkie znaki z pamięci kalkulatora"""
@@ -216,6 +222,12 @@ class Application(Frame):
         self.liczby.append("+")
         self.znak = ""
         self.wyswietlacz.delete(0.0,END)
+
+    def zmiana_znaku(self):
+        """Zmienia znak na przeciwny"""
+        self.znak += "ERROR"
+        self.wyswietlacz.delete(0.0,END)
+        self.wyswietlacz.insert(END,self.znak)
         
     def wprowadz_0(self):
         """Wprowadź 0"""
@@ -267,7 +279,7 @@ class Application(Frame):
 
 root = Tk()
 root.title("Kalkulator")
-root.geometry("440x600")
+root.geometry("415x540")
 
 app = Application(root)
 
