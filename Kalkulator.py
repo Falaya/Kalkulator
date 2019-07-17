@@ -1,4 +1,4 @@
-#Kalkulator 2.0
+#Kalkulator 3.0
 #Wyświetlacz na 10 liczb, dodawanie, odejmowanie, mnożenie i dzielenie.
 #Po wprowadzeniu znaku innego niż liczba kalkulator przechowuje liczbę w pamięci i zeruje wyświetlacz
 
@@ -21,115 +21,125 @@ class Application(Frame):
 
         #Model kalulatora
         self.nazwa = Label(self, text = "STANIO 7260",font=("Courier", 18) )
-        self.nazwa.grid(row = 1, column = 0, sticky = W)
+        self.nazwa.grid(row = 1, column = 1, sticky = W, columnspan = 4)
         
         #Oddzielenie nazwy kalkulatora od górnej krawędzi wyświetlacza
         self.przerwa2 = Label(self,font=("Courier", 4) )
         self.przerwa2.grid(row = 2, column = 0, sticky = W)
 
         #Wyświetlacz
-        self.wyswietlacz = Text(self, width = 11, height = 1, wrap = W, font=("Courier", 50))
-        self.wyswietlacz.grid(row = 3, column = 0, columnspan = 20, rowspan = 2, sticky = W)
+        self.wyswietlacz = Text(self, width = 10, height = 1, wrap = W, font=("Courier", 50))
+        self.wyswietlacz.grid(row = 3, column = 1, columnspan = 4, rowspan = 2, sticky = N)
 
         #Oddzielenie górnej krawędzi wyświetlacza od przycisków
         self.przerwa2 = Label(self,font=("Courier", 4) )
         self.przerwa2.grid(row = 5, column = 0, sticky = W)
         
         #Przycisk () - wstawienie obu nawiasów
-        self.przycisk_nawiasy = Button(self, text = "( )", command = "Wstaw nawiasy")
-        self.przycisk_nawiasy.grid(row = 6, column = 0, sticky = W)
+        self.przycisk_nawiasy = Button(self, text = "1/x", command = self.odwrocenie_liczby, font=("Courier", 28))
+        self.przycisk_nawiasy.grid(row = 6, column = 1, sticky = W)
 
         #Przycisk C - czyszczenie wszystkiego
-        self.przycisk_C = Button(self, text = "C", command = self.usuwanie_C)
-        self.przycisk_C.grid(row = 6, column = 1, sticky = W)
+        self.przycisk_C = Button(self, text = " C ", command = self.usuwanie_C, font=("Courier", 28))
+        self.przycisk_C.grid(row = 6, column = 2, sticky = W)
 
         #Przycisk <- - usuwanie ostatniego znaku
-        self.przycisk_back = Button(self, text = "<--", command = self.usuwanie_back)
-        self.przycisk_back.grid(row = 6, column = 2, sticky = W)
+        self.przycisk_back = Button(self, text = "<--", command = self.usuwanie_back, font=("Courier", 28))
+        self.przycisk_back.grid(row = 6, column = 3, sticky = W)
         
         #Przycisk / - dzielenie
-        self.przycisk_dzielenie = Button(self, text = "/", command = self.dzielenie)
-        self.przycisk_dzielenie.grid(row = 6, column = 3, sticky = W)
+        self.przycisk_dzielenie = Button(self, text = " / ", command = self.dzielenie, font=("Courier", 28))
+        self.przycisk_dzielenie.grid(row = 6, column = 4, sticky = W)
         
         #Oddzielenie przyciskow
         self.przerwa3 = Label(self,font=("Courier", 4) )
         self.przerwa3.grid(row = 7, column = 0, sticky = W)
 
         #Przycisk 1 - wprowadzenie liczby 1
-        self.przycisk_1 = Button(self, text = "1", command = self.wprowadz_1)
-        self.przycisk_1.grid(row = 8, column = 0, sticky = W)
+        self.przycisk_1 = Button(self, text = " 1 ", command = self.wprowadz_1, font=("Courier", 28))
+        self.przycisk_1.grid(row = 8, column = 1, sticky = W)
 
         #Przycisk 2 - wprowadzenie liczby 2
-        self.przycisk_2 = Button(self, text = "2", command = self.wprowadz_2)
-        self.przycisk_2.grid(row = 8, column = 1, sticky = W)
+        self.przycisk_2 = Button(self, text = " 2 ", command = self.wprowadz_2, font=("Courier", 28))
+        self.przycisk_2.grid(row = 8, column = 2, sticky = W)
        
         #Przycisk 3 - wprowadzenie liczby 3
-        self.przycisk_3 = Button(self, text = "3", command = self.wprowadz_3)
-        self.przycisk_3.grid(row = 8, column = 2, sticky = W)
+        self.przycisk_3 = Button(self, text = " 3 ", command = self.wprowadz_3, font=("Courier", 28))
+        self.przycisk_3.grid(row = 8, column = 3, sticky = W)
         
         #Przycisk * - mnożenie
-        self.przycisk_mnozenie = Button(self, text = "*", command = self.mnozenie)
-        self.przycisk_mnozenie.grid(row = 8, column = 3, sticky = W)
+        self.przycisk_mnozenie = Button(self, text = " * ", command = self.mnozenie, font=("Courier", 28))
+        self.przycisk_mnozenie.grid(row = 8, column = 4, sticky = W)
         
         #Oddzielenie przyciskow
         self.przerwa4 = Label(self,font=("Courier", 4) )
         self.przerwa4.grid(row = 9, column = 0, sticky = W)
 
         #Przycisk 4 - wprowadzenie liczby 4
-        self.przycisk_4 = Button(self, text = "4", command = self.wprowadz_4)
-        self.przycisk_4.grid(row = 10, column = 0, sticky = W)
+        self.przycisk_4 = Button(self, text = " 4 ", command = self.wprowadz_4, font=("Courier", 28))
+        self.przycisk_4.grid(row = 10, column = 1, sticky = W)
 
         #Przycisk 5 - wprowadzenie liczby 5
-        self.przycisk_5 = Button(self, text = "5", command = self.wprowadz_5)
-        self.przycisk_5.grid(row = 10, column = 1, sticky = W)
+        self.przycisk_5 = Button(self, text = " 5 ", command = self.wprowadz_5, font=("Courier", 28))
+        self.przycisk_5.grid(row = 10, column = 2, sticky = W)
 
         #Przycisk 6 - wprowadzenie liczby 6
-        self.przycisk_6 = Button(self, text = "6", command = self.wprowadz_6)
-        self.przycisk_6.grid(row = 10, column = 2, sticky = W)
+        self.przycisk_6 = Button(self, text = " 6 ", command = self.wprowadz_6, font=("Courier", 28))
+        self.przycisk_6.grid(row = 10, column = 3, sticky = W)
         
         #Przycisk - - odejmowanie
-        self.przycisk_odejmowanie = Button(self, text = "-", command = self.odejmowanie)
-        self.przycisk_odejmowanie.grid(row = 10, column = 3, sticky = W)
+        self.przycisk_odejmowanie = Button(self, text = " - ", command = self.odejmowanie, font=("Courier", 28))
+        self.przycisk_odejmowanie.grid(row = 10, column = 4, sticky = W)
         
         #Oddzielenie przyciskow
         self.przerwa5 = Label(self,font=("Courier", 4) )
         self.przerwa5.grid(row = 11, column = 0, sticky = W)
 
         #Przycisk 7 - wprowadzenie liczby 7
-        self.przycisk_7 = Button(self, text = "7", command = self.wprowadz_7)
-        self.przycisk_7.grid(row = 12, column = 0, sticky = W)
+        self.przycisk_7 = Button(self, text = " 7 ", command = self.wprowadz_7, font=("Courier", 28))
+        self.przycisk_7.grid(row = 12, column = 1, sticky = W)
 
         #Przycisk 8 - wprowadzenie liczby 8
-        self.przycisk_8 = Button(self, text = "8", command = self.wprowadz_8)
-        self.przycisk_8.grid(row = 12, column = 1, sticky = W)
+        self.przycisk_8 = Button(self, text = " 8 ", command = self.wprowadz_8, font=("Courier", 28))
+        self.przycisk_8.grid(row = 12, column = 2, sticky = W)
 
         #Przycisk 9 - wprowadzenie liczby 9
-        self.przycisk_9 = Button(self, text = "9", command = self.wprowadz_9)
-        self.przycisk_9.grid(row = 12, column = 2, sticky = W)
+        self.przycisk_9 = Button(self, text = " 9 ", command = self.wprowadz_9, font=("Courier", 28))
+        self.przycisk_9.grid(row = 12, column = 3, sticky = W)
         
         #Przycisk + - dodawanie
-        self.przycisk_dodawanie = Button(self, text = "+", command = self.dodawanie)
-        self.przycisk_dodawanie.grid(row = 12, column = 3, sticky = W)
+        self.przycisk_dodawanie = Button(self, text = " + ", command = self.dodawanie, font=("Courier", 28))
+        self.przycisk_dodawanie.grid(row = 12, column = 4, sticky = W)
         
         #Oddzielenie przyciskow
         self.przerwa6 = Label(self,font=("Courier", 4) )
         self.przerwa6.grid(row = 13, column = 0, sticky = W)
         
         #Przycisk +/- - zmiana znaku liczby w wyświetlaczu
-        self.przycisk_dodawanie = Button(self, text = "+/-", command = "Wprowadź +/-")
-        self.przycisk_dodawanie.grid(row = 14, column = 0, sticky = W)
+        self.przycisk_dodawanie = Button(self, text = "+/-", command = self.zmiana_znaku, font=("Courier", 28))
+        self.przycisk_dodawanie.grid(row = 14, column = 1, sticky = W)
 
         #Przycisk 0 - wprowadzenie liczby 0
-        self.przycisk_0 = Button(self, text = "0", command = self.wprowadz_0)
-        self.przycisk_0.grid(row = 14, column = 1, sticky = W)  
+        self.przycisk_0 = Button(self, text = " 0 ", command = self.wprowadz_0, font=("Courier", 28))
+        self.przycisk_0.grid(row = 14, column = 2, sticky = W)  
 
         #Przycisk . - stawianie kropki
-        self.przycisk_kropka = Button(self, text = ".", command = self.wprowadz_kropka)
-        self.przycisk_kropka.grid(row = 14, column = 2, sticky = W) 
+        self.przycisk_kropka = Button(self, text = " . ", command = self.wprowadz_kropka, font=("Courier", 28))
+        self.przycisk_kropka.grid(row = 14, column = 3, sticky = W) 
 
         #Przycisk = - wykonanie operacji
-        self.przycisk_rownasie = Button(self, text = "=", command = self.wynik)
-        self.przycisk_rownasie.grid(row = 14, column = 3, sticky = W)   
+        self.przycisk_rownasie = Button(self, text = " = ", command = self.wynik, font=("Courier", 28))
+        self.przycisk_rownasie.grid(row = 14, column = 4, sticky = W)   
+
+    def odwrocenie_liczby(self):
+        """Odwrócenie liczby"""
+        if self.znak != "":
+            odwrotnosc = 1/float(self.znak)
+            if odwrotnosc%1 == 0:
+                odwrotnosc = int(odwrotnosc)        
+            self.znak = str(odwrotnosc)
+            self.wyswietlacz.delete(0.0,END)
+            self.wyswietlacz.insert(0.0,self.znak)
         
     def usuwanie_C(self):
         """Usuwa wszystkie znaki z pamięci kalkulatora"""
@@ -146,10 +156,11 @@ class Application(Frame):
         
     def dzielenie(self):
         """Wprowadź znak dzielenia"""
-        self.liczby.append(self.znak)
-        self.liczby.append("/")
-        self.znak = ""
-        self.wyswietlacz.delete(0.0,END)
+        if self.znak != "":
+            self.liczby.append(self.znak)
+            self.liczby.append("/")
+            self.znak = ""
+            self.wyswietlacz.delete(0.0,END)
 
     def wprowadz_1(self):
         """Wprowadź 1"""
@@ -168,10 +179,11 @@ class Application(Frame):
         
     def mnozenie(self):
         """Wprowadź znak mnożenia,"""
-        self.liczby.append(self.znak)
-        self.liczby.append("*")
-        self.znak = ""
-        self.wyswietlacz.delete(0.0,END)
+        if self.znak != "":
+            self.liczby.append(self.znak)
+            self.liczby.append("*")
+            self.znak = ""
+            self.wyswietlacz.delete(0.0,END)
         
     def wprowadz_4(self):
         """Wprowadź 4"""
@@ -190,10 +202,11 @@ class Application(Frame):
         
     def odejmowanie(self):
         """Wprowadź znak odejmowania"""
-        self.liczby.append(self.znak)
-        self.liczby.append("-")
-        self.znak = ""
-        self.wyswietlacz.delete(0.0,END)
+        if self.znak != "":
+            self.liczby.append(self.znak)
+            self.liczby.append("-")
+            self.znak = ""
+            self.wyswietlacz.delete(0.0,END)
         
     def wprowadz_7(self):
         """Wprowadź 7"""
@@ -212,10 +225,21 @@ class Application(Frame):
         
     def dodawanie(self):
         """Wprowadź znak dodawania"""
-        self.liczby.append(self.znak)
-        self.liczby.append("+")
-        self.znak = ""
-        self.wyswietlacz.delete(0.0,END)
+        if self.znak != "":
+            self.liczby.append(self.znak)
+            self.liczby.append("+")
+            self.znak = ""
+            self.wyswietlacz.delete(0.0,END)
+
+    def zmiana_znaku(self):
+        """Zmienia znak na przeciwny"""
+        if self.znak != "":
+            nowy_znak = -1*float(self.znak)
+            if nowy_znak%1 == 0:
+                nowy_znak = int(nowy_znak)        
+            self.znak = str(nowy_znak)
+            self.wyswietlacz.delete(0.0,END)
+            self.wyswietlacz.insert(END,self.znak)
         
     def wprowadz_0(self):
         """Wprowadź 0"""
@@ -224,8 +248,9 @@ class Application(Frame):
 
     def wprowadz_kropka(self):
         """Wprowadź ."""
-        self.znak += "."
-        self.wyswietlacz.insert(END,".")        
+        if self.znak != "":
+            self.znak += "."
+            self.wyswietlacz.insert(END,".")        
         
     def wynik(self):
         self.liczby.append(self.znak)
@@ -264,10 +289,11 @@ class Application(Frame):
 
         obliczenie = 0                  #Zerowanie licznika obliczeń
         self.liczby = [wynik]           #Zerowanie pamięci kalkulatora i wstawienie na pierwszym miejscu wyniku poprzednich obliczeń
+        self.znak = str(wynik)          #Zwraca liczę do wartości początkowej wyświetlacza, aby móc ją odwrócić czy zmienić znak
 
 root = Tk()
 root.title("Kalkulator")
-root.geometry("440x600")
+root.geometry("415x540")
 
 app = Application(root)
 
