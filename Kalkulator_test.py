@@ -1,4 +1,4 @@
-#Kalkulator 2.0
+#Kalkulator 3.0
 #Wyświetlacz na 10 liczb, dodawanie, odejmowanie, mnożenie i dzielenie.
 #Po wprowadzeniu znaku innego niż liczba kalkulator przechowuje liczbę w pamięci i zeruje wyświetlacz
 
@@ -133,9 +133,13 @@ class Application(Frame):
 
     def odwrocenie_liczby(self):
         """Odwrócenie liczby"""
-        self.znak = "ERROR"
-        self.wyswietlacz.delete(0.0,END)
-        self.wyswietlacz.insert(0.0,self.znak)
+        if self.znak != "":
+            odwrotnosc = 1/float(self.znak)
+            if odwrotnosc%1 == 0:
+                odwrotnosc = int(odwrotnosc)        
+            self.znak = str(odwrotnosc)
+            self.wyswietlacz.delete(0.0,END)
+            self.wyswietlacz.insert(0.0,self.znak)
         
     def usuwanie_C(self):
         """Usuwa wszystkie znaki z pamięci kalkulatora"""
@@ -152,10 +156,11 @@ class Application(Frame):
         
     def dzielenie(self):
         """Wprowadź znak dzielenia"""
-        self.liczby.append(self.znak)
-        self.liczby.append("/")
-        self.znak = ""
-        self.wyswietlacz.delete(0.0,END)
+        if self.znak != "":
+            self.liczby.append(self.znak)
+            self.liczby.append("/")
+            self.znak = ""
+            self.wyswietlacz.delete(0.0,END)
 
     def wprowadz_1(self):
         """Wprowadź 1"""
@@ -174,10 +179,11 @@ class Application(Frame):
         
     def mnozenie(self):
         """Wprowadź znak mnożenia,"""
-        self.liczby.append(self.znak)
-        self.liczby.append("*")
-        self.znak = ""
-        self.wyswietlacz.delete(0.0,END)
+        if self.znak != "":
+            self.liczby.append(self.znak)
+            self.liczby.append("*")
+            self.znak = ""
+            self.wyswietlacz.delete(0.0,END)
         
     def wprowadz_4(self):
         """Wprowadź 4"""
@@ -196,10 +202,11 @@ class Application(Frame):
         
     def odejmowanie(self):
         """Wprowadź znak odejmowania"""
-        self.liczby.append(self.znak)
-        self.liczby.append("-")
-        self.znak = ""
-        self.wyswietlacz.delete(0.0,END)
+        if self.znak != "":
+            self.liczby.append(self.znak)
+            self.liczby.append("-")
+            self.znak = ""
+            self.wyswietlacz.delete(0.0,END)
         
     def wprowadz_7(self):
         """Wprowadź 7"""
@@ -218,16 +225,21 @@ class Application(Frame):
         
     def dodawanie(self):
         """Wprowadź znak dodawania"""
-        self.liczby.append(self.znak)
-        self.liczby.append("+")
-        self.znak = ""
-        self.wyswietlacz.delete(0.0,END)
+        if self.znak != "":
+            self.liczby.append(self.znak)
+            self.liczby.append("+")
+            self.znak = ""
+            self.wyswietlacz.delete(0.0,END)
 
     def zmiana_znaku(self):
         """Zmienia znak na przeciwny"""
-        self.znak += "ERROR"
-        self.wyswietlacz.delete(0.0,END)
-        self.wyswietlacz.insert(END,self.znak)
+        if self.znak != "":
+            nowy_znak = -1*float(self.znak)
+            if nowy_znak%1 == 0:
+                nowy_znak = int(nowy_znak)        
+            self.znak = str(nowy_znak)
+            self.wyswietlacz.delete(0.0,END)
+            self.wyswietlacz.insert(END,self.znak)
         
     def wprowadz_0(self):
         """Wprowadź 0"""
@@ -236,8 +248,9 @@ class Application(Frame):
 
     def wprowadz_kropka(self):
         """Wprowadź ."""
-        self.znak += "."
-        self.wyswietlacz.insert(END,".")        
+        if self.znak != "":
+            self.znak += "."
+            self.wyswietlacz.insert(END,".")        
         
     def wynik(self):
         self.liczby.append(self.znak)
@@ -276,6 +289,7 @@ class Application(Frame):
 
         obliczenie = 0                  #Zerowanie licznika obliczeń
         self.liczby = [wynik]           #Zerowanie pamięci kalkulatora i wstawienie na pierwszym miejscu wyniku poprzednich obliczeń
+        self.znak = str(wynik)          #Zwraca liczę do wartości początkowej wyświetlacza, aby móc ją odwrócić czy zmienić znak
 
 root = Tk()
 root.title("Kalkulator")
