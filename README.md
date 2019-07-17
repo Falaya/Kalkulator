@@ -25,8 +25,5 @@
     - zapis wyniku w formnie 1/x, gdzie x to nasz wynik
     - usuwanie pojedynczego znaku
     - wstawianie kropki
-    - wstawianie nawiasu prawego i lewego
 # Aktualny postęp
-    - Wersja 2.0
-    - usuwanie pojedynczego znaku
-    - wstawianie kropki
+    - Wersja 3.0
