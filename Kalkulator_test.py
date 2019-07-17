@@ -1,4 +1,4 @@
-#kalkulator 1.7
+#Kalkulator 2.0
 #Wyświetlacz na 10 liczb, dodawanie, odejmowanie, mnożenie i dzielenie.
 #Po wprowadzeniu znaku innego niż liczba kalkulator przechowuje liczbę w pamięci i zeruje wyświetlacz
 
@@ -231,43 +231,39 @@ class Application(Frame):
         self.liczby.append(self.znak)
         self.wyswietlacz.delete(0.0,END)
         wynik = 0
-        for i in self.liczby:
+        obliczenie = 0
+        for i in self.liczby:           #Wszędzie jest .index(i)+1 bo to jest liczba za znakiem, a to ją chcemy wykorzystać do obliczeń
             if i == "/":
                 wynik /= float(self.liczby[self.liczby.index(i)+1])
-                if wynik%1 == 0:
-                    wynik = int(wynik)
-                    self.wyswietlacz.insert(END, wynik)
-                else:
-                    self.wyswietlacz.insert(END, wynik)
+                obliczenie += 1         
             elif i == "*":
                 wynik *= float(self.liczby[self.liczby.index(i)+1])
-                if wynik%1 == 0:
-                    wynik = int(wynik)
-                    self.wyswietlacz.insert(END, wynik)
-                else:
-                    self.wyswietlacz.insert(END, wynik)
-
+                obliczenie += 1
             elif i == "-":
                 wynik -= float(self.liczby[self.liczby.index(i)+1])
-                if wynik%1 == 0:
-                    wynik = int(wynik)
-                    self.wyswietlacz.insert(END, wynik)
-                else:
-                    self.wyswietlacz.insert(END, wynik)
-
+                obliczenie += 1
             elif i == "+":
                 wynik += float(self.liczby[self.liczby.index(i)+1])
-                if wynik%1 == 0:
+                obliczenie += 1          
+            elif obliczenie == 0:
+                obliczenie += 1
+                wynik += float(i)
+
+            if obliczenie == 2:         #Po wykonaniu 2 operacji podaj wynik ([1]operacja to pobierz pierwszą liczbę, [2]operacja to sprawdź znak między nimi)
+                ograniczenie_wyswietlacza = str(wynik) #sprawdzenie czy "wynik" ma nie więcej niż 10 znaków
+                if len(ograniczenie_wyswietlacza) > 8:
+                    wynik = float(ograniczenie_wyswietlacza[:8]) #Jak ma to zmniejszamy jego długość do 10 znaków
+                    
+                if wynik%1 == 0:        #Jeżeli wynik jest liczbą całkowitą
                     wynik = int(wynik)
                     self.wyswietlacz.insert(END, wynik)
-                else:
+                    break               #Trzeba pomyśleć jak się tego pozbyć
+                else:                   #Jeżeli wynik jest liczbą zmiennoprzecinkową
                     self.wyswietlacz.insert(END, wynik)
- 
-            else:
-                if self.liczby.index(i)== 0:
-                    wynik += float(i)
+                    break               #Trzeba pomyśleć jak się tego pozbyć
 
-        self.liczby = [wynik] 
+        obliczenie = 0                  #Zerowanie licznika obliczeń
+        self.liczby = [wynik]           #Zerowanie pamięci kalkulatora i wstawienie na pierwszym miejscu wyniku poprzednich obliczeń
 
 root = Tk()
 root.title("Kalkulator")
