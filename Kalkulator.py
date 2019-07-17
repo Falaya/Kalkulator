@@ -136,7 +136,7 @@ class Application(Frame):
         if self.znak != "":
             odwrotnosc = 1/float(self.znak)
             if odwrotnosc%1 == 0:
-                odwrotnosc = int(odwrotnosc)        
+                odwrotnosc = int(odwrotnosc)
             self.znak = str(odwrotnosc)
             self.wyswietlacz.delete(0.0,END)
             self.wyswietlacz.insert(0.0,self.znak)
@@ -157,7 +157,10 @@ class Application(Frame):
     def dzielenie(self):
         """Wprowadź znak dzielenia"""
         if self.znak != "":
-            self.liczby.append(self.znak)
+            if len(self.liczby):
+                self.liczby[0] = self.znak
+            else:
+                self.liczby.append(self.znak)
             self.liczby.append("/")
             self.znak = ""
             self.wyswietlacz.delete(0.0,END)
@@ -180,7 +183,10 @@ class Application(Frame):
     def mnozenie(self):
         """Wprowadź znak mnożenia,"""
         if self.znak != "":
-            self.liczby.append(self.znak)
+            if len(self.liczby):
+                self.liczby[0] = self.znak
+            else:
+                self.liczby.append(self.znak)
             self.liczby.append("*")
             self.znak = ""
             self.wyswietlacz.delete(0.0,END)
@@ -203,7 +209,10 @@ class Application(Frame):
     def odejmowanie(self):
         """Wprowadź znak odejmowania"""
         if self.znak != "":
-            self.liczby.append(self.znak)
+            if len(self.liczby):
+                self.liczby[0] = self.znak
+            else:
+                self.liczby.append(self.znak)
             self.liczby.append("-")
             self.znak = ""
             self.wyswietlacz.delete(0.0,END)
@@ -226,7 +235,10 @@ class Application(Frame):
     def dodawanie(self):
         """Wprowadź znak dodawania"""
         if self.znak != "":
-            self.liczby.append(self.znak)
+            if len(self.liczby):
+                self.liczby[0] = self.znak
+            else:
+                self.liczby.append(self.znak)
             self.liczby.append("+")
             self.znak = ""
             self.wyswietlacz.delete(0.0,END)
@@ -236,7 +248,7 @@ class Application(Frame):
         if self.znak != "":
             nowy_znak = -1*float(self.znak)
             if nowy_znak%1 == 0:
-                nowy_znak = int(nowy_znak)        
+                nowy_znak = int(nowy_znak)
             self.znak = str(nowy_znak)
             self.wyswietlacz.delete(0.0,END)
             self.wyswietlacz.insert(END,self.znak)
