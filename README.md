@@ -27,18 +27,6 @@
     - wstawianie kropki
     - wstawianie nawiasu prawego i lewego
 # Aktualny postęp
-    - wyświetlacz dostosowany do co najmniej 10 liczb
-    - przycisk do dodawania
-    - przycisk do odejomwania
-    - przycisk do mnożenia
-    - przycisk do dzielenia
-    - przycisk do usuwania 1 znaku
-    - przycisk do usuwania całej liczby
-    - przycisk do kropki
-    - przycisk do równia się
-    - dodawanie
-    - odejmowanie
-    - dzielenie
-    - mnożenie
-    - wyświetlanie do 10 liczb
-    - obliczanie wyniku
+    - Wersja 2.0
+    - usuwanie pojedynczego znaku
+    - wstawianie kropki
